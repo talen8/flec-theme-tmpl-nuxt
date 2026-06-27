@@ -1,0 +1,65 @@
+name: flecblog-dev
+
+services:
+  # ============================================
+  # PostgreSQL 数据库
+  # ============================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: flec_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: flecblog_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # FlecBlog 后端 API 服务
+  # ============================================
+  server:
+    image: talen8/flec-server:latest
+    container_name: flec_server
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: 8080
+      SERVER_ALLOW_ORIGINS: "*"
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: flecblog_dev
+      JWT_SECRET: flecblog_dev_secret
+    ports:
+      - "8080:8080"
+    volumes:
+      - server_data:/app/data
+
+  # ============================================
+  # FlecBlog 管理后台
+  # ============================================
+  admin:
+    image: talen8/flec-admin:latest
+    container_name: flec_admin
+    restart: unless-stopped
+    depends_on:
+      - server
+    environment:
+      API_URL: http://localhost:8080/api/v1
+    ports:
+      - "4000:4000"
+
+volumes:
+  pgdata:
+  server_data:

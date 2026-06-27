@@ -1,0 +1,70 @@
+{
+  "$meta": {
+    "slug": "my-theme",
+    "name": "我的主题",
+    "version": "0.1.0",
+    "author": "",
+    "description": "基于 FlecBlog 的主题"
+  },
+  "$menus": {
+    "navigation": { "label": "导航菜单", "maxDepth": 2, "defaults": [] }
+  },
+  "$features": {
+    "moments": false,
+    "feedback": false,
+    "oauth": false,
+    "site_subscribe": false
+  },
+  "演示配置": {
+    "text_demo": {
+      "type": "string",
+      "title": "文本输入",
+      "default": ""
+    },
+    "textarea_demo": {
+      "type": "string",
+      "title": "多行文本",
+      "format": "textarea",
+      "default": ""
+    },
+    "image_demo": {
+      "type": "string",
+      "title": "图片上传",
+      "format": "image",
+      "default": ""
+    },
+    "color_demo": {
+      "type": "string",
+      "title": "颜色选择",
+      "format": "color",
+      "default": "#1a73e8"
+    },
+    "number_demo": {
+      "type": "integer",
+      "title": "数字输入",
+      "default": 10,
+      "min": 1,
+      "max": 100
+    },
+    "select_demo": {
+      "type": "string",
+      "title": "下拉选择",
+      "enum": [
+        { "label": "单栏", "value": "single" },
+        { "label": "双栏", "value": "double" },
+        { "label": "瀑布流", "value": "waterfall" }
+      ],
+      "default": "single"
+    },
+    "array_demo": {
+      "type": "array",
+      "title": "社交链接",
+      "default": [],
+      "x-item-fields": [
+        { "key": "name", "type": "text", "placeholder": "平台名称" },
+        { "key": "icon", "type": "text", "placeholder": "图标类名" },
+        { "key": "url", "type": "text", "placeholder": "链接地址" }
+      ]
+    }
+  }
+}

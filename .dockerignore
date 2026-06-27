@@ -1,0 +1,15 @@
+node_modules
+.nuxt
+.output
+dist
+.git
+.github
+.vscode
+*.log
+npm-debug.log*
+.DS_Store
+docs
+server
+.env
+.env.local
+.env.*.local
