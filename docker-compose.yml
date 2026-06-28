@@ -41,6 +41,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: flecblog_dev
       JWT_SECRET: flecblog_dev_secret
+      API_URL: http://localhost:8080/api/v1
     ports:
       - "8080:8080"
     volumes:
